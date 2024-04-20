@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Conversion</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="images/unnamed.png">
+</head>
+<body>
+    <h1>Temperature Conversion</h1>
+    <div class="container">
+        <div class="converter">
+            <input type="text" id="result" disabled>
+            <br>
+            <div class="input-group">
+                <input type="text" id="degrees" placeholder="Enter value" style="height: 25px;">
+                <select id="fromUnit">
+                    <option value="0">Fahrenheit</option>
+                    <option value="1">Celsius</option>
+                    <option value="2">Kelvin</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <input type="button" value="Convert" id="convertButton">
+                <select id="toUnit">
+                    <option value="0">Fahrenheit</option>
+                    <option value="1">Celsius</option>
+                    <option value="2">Kelvin</option>
+                </select>
+            </div>
+            
+        </div>
+    </div>
+    <script>
+        document.getElementById('convertButton').addEventListener('click', function () {
+            // Get input values
+            var degrees = parseFloat(document.getElementById('degrees').value);
+            var fromUnit = parseInt(document.getElementById('fromUnit').value);
+            var toUnit = parseInt(document.getElementById('toUnit').value);
+
+            // Perform conversion
+            var result;
+            if (fromUnit === 0 && toUnit === 1) {
+                // Fahrenheit to Celsius
+                result = (degrees - 32) * (5 / 9);
+            } else if (fromUnit === 0 && toUnit === 2) {
+                // Fahrenheit to Kelvin
+                result = (degrees + 459.67) * (5 / 9);
+            } else if (fromUnit === 1 && toUnit === 0) {
+                // Celsius to Fahrenheit
+                result = (degrees * (9 / 5)) + 32;
+            } else if (fromUnit === 1 && toUnit === 2) {
+                // Celsius to Kelvin
+                result = degrees + 273.15;
+            } else if (fromUnit === 2 && toUnit === 0) {
+                // Kelvin to Fahrenheit
+                result = (degrees * (9 / 5)) - 459.67;
+            } else if (fromUnit === 2 && toUnit === 1) {
+                // Kelvin to Celsius
+                result = degrees - 273.15;
+            } else {
+                // No conversion needed
+                result = degrees;
+            }
+
+            // Display result
+            document.getElementById('result').value = result.toFixed(2);
+        });
+    </script>
+</body>
+</html>
